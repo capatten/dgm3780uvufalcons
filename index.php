@@ -113,29 +113,29 @@
 						//alert(declinedString);
 						if (declinedString.indexOf("public_profile") == -1)
 						{
-							$(document).find('.fbPPP').html('✓')
+							$(document).find('.fbPPP').html('<font color="lime">✓</font>')
 						}
 						else
 						{
-							$(document).find('.fbPPP').html('x')
+							$(document).find('.fbPPP').html('<font color="red">x</font>')
 						}
 						
 						if (declinedString.indexOf("email") == -1)
 						{
-							$(document).find('.fbPE').html('✓')
+							$(document).find('.fbPE').html('<font color="lime">✓</font>')
 						}
 						else
 						{
-							$(document).find('.fbPE').html('x')
+							$(document).find('.fbPE').html('<font color="red">x</font>')
 						}
 						
 						if (declinedString.indexOf("user_friends") == -1)
 						{
-							$(document).find('.fbPUF').html('✓')
+							$(document).find('.fbPUF').html('<font color="lime">✓</font>')
 						}
 						else
 						{
-							$(document).find('.fbPUF').html('x')
+							$(document).find('.fbPUF').html('<font color="red">x</font>')
 						}
 					});
 			}
