@@ -6,6 +6,10 @@
 	</head>
 	<body>
 		<div id="fb-root"></div>
+		<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
 		<script>
 
 			(function(d, s, id) {
@@ -90,6 +94,49 @@
 						console.log('Successful login for: ' + response.name);
 						document.getElementById('status').innerHTML =
 						'Thanks for logging in, ' + response.name + '!';
+						
+						checkFBPermissions();
+					});
+			}
+			
+			function checkFBPermissions()
+			{
+				FB.api('/me/permissions', function(response) {
+						var declined = [];
+						for (i = 0; i < response.data.length; i++) { 
+							if (response.data[i].status == 'declined') {
+								declined.push(response.data[i].permission)
+							}
+						}
+						//alert(declined.toString())
+						var declinedString = declined.toString()
+						//alert(declinedString);
+						if (declinedString.indexOf("public_profile") == -1)
+						{
+							$(document).find('.fbPPP').html('✓')
+						}
+						else
+						{
+							$(document).find('.fbPPP').html('x')
+						}
+						
+						if (declinedString.indexOf("email") == -1)
+						{
+							$(document).find('.fbPE').html('✓')
+						}
+						else
+						{
+							$(document).find('.fbPE').html('x')
+						}
+						
+						if (declinedString.indexOf("user_friends") == -1)
+						{
+							$(document).find('.fbPUF').html('✓')
+						}
+						else
+						{
+							$(document).find('.fbPUF').html('x')
+						}
 					});
 			}
   
@@ -103,6 +150,22 @@
 		<div id="fbLoginContainer">
 			<fb:login-button autologoutlink="true" scope="public_profile,email,user_friends" onlogin="checkLoginState();">
 			</fb:login-button></div>
+			
+		<table>
+			<tr>
+				<th>Approved</th>
+				<th>Permissions</th>
+			</tr>
+			<tr>
+				<td class="fbPPP"></td><td>public_profile</td>
+			</tr>
+			<tr>
+				<td class="fbPE"></td><td>email</td>
+			</tr>
+			<tr>
+				<td class="fbPUF"></td><td>user_friends</td>
+			</tr>
+		</table>
 
 
 
