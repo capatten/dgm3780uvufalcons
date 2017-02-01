@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<title>Facebook Login JavaScript Example</title>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8"/>
+		<meta property="fb:app_id" 		content="590347651155605" />
 		<meta property="og:url" 		content="https://omniru.com/3780/group-p1/" />
 		<meta property="og:type"        content="article" />
 		<meta property="og:title"       content="UVU Falcons Are Awesome" />
