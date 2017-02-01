@@ -177,6 +177,20 @@
 		<div id="status">
 		</div>
 
+
+
+		<br><br>
+		
+		<div id="shareBtn" class="btn btn-success clearfix"><button style="color:white; padding: 5px; border-style: solid; border-radius:5px; background-color:#0000ff; border-color:#0000ff; cursor: pointer; ">Share this page to facebook</button></div>
+		<script>
+			document.getElementById('shareBtn').onclick = function() {
+				FB.ui({
+						method: 'share',
+						display: 'popup',
+						href: 'https://omniru.com/3780/group-p1/',
+					}, function(response){});
+			}
+		</script>
 		
 		
 
