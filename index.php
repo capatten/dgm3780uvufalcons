@@ -3,6 +3,11 @@
 	<head>
 		<title>Facebook Login JavaScript Example</title>
 		<meta charset="UTF-8">
+		<meta property="og:url" 		content="https://omniru.com/3780/group-p1/" />
+		<meta property="og:type"        content="Example" />
+		<meta property="og:title"       content="UVU Falcons Are Awesome" />
+		<meta property="og:description" content="We Love Calvin and Hobbs" />
+		<meta property="og:image"       content="http://currentsurroundings.com/content/random/calvin-hobbes/large/calvin_and_hobbes_006.jpg" />
 	</head>
 	<body>
         
@@ -19,7 +24,7 @@
     }(document, 'script', 'facebook-jssdk'));</script>
     
     <!-- Facebook Sharing button -->
-        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
+        <div class="fb-share-button" data-href="https://omniru.com/3780/group-p1/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
     
         
         
