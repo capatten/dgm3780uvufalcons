@@ -4,7 +4,7 @@
 		<title>Facebook Login JavaScript Example</title>
 		<meta charset="UTF-8">
 		<meta property="og:url" 		content="https://omniru.com/3780/group-p1/" />
-		<meta property="og:type"        content="Example" />
+		<meta property="og:type"        content="article" />
 		<meta property="og:title"       content="UVU Falcons Are Awesome" />
 		<meta property="og:description" content="We Love Calvin and Hobbs" />
 		<meta property="og:image"       content="http://currentsurroundings.com/content/random/calvin-hobbes/large/calvin_and_hobbes_006.jpg" />
