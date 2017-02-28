@@ -3,7 +3,6 @@
 //Z~KRyXJk8dzP
 session_start();
 
-
 require ("pgConnect.php");
 
 $waiting_userid = intval($_SESSION['userid']);
