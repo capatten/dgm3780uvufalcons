@@ -4,9 +4,7 @@
 	<meta charset="utf-8">
 	<title>Tic Tac Toe</title>
 	<link href="https://fonts.googleapis.com/css?family=Bahiana" rel="stylesheet">
-	<link href="css/phone-default.css" rel="stylesheet">
-	<link href="css/desktop.css" rel="stylesheet">
-	<link href="css/tablet.css" rel="stylesheet">
+	<link href="../css/phone-default.css" rel="stylesheet">
 	<script
 	  src="https://code.jquery.com/jquery-3.1.1.min.js"
 	  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -22,10 +20,6 @@
 		}(document, 'script', 'facebook-jssdk'));
 		
 		function statusChangeCallback(response) {
-			// The response object is returned with a status field that lets the
-			// app know the current login status of the person.
-			// Full docs on the response object can be found in the documentation
-			// for FB.getLoginStatus().
 			if (response.status === 'connected') {
 				// Logged into your app and Facebook.
 				getUserID(response);
@@ -38,41 +32,21 @@
 			});
 		}
 		
-		
 		function logoutFacebook() {
 			FB.logout(function(response) {
-				// Person is now logged out
 			});
 		}
 		
 		window.fbAsyncInit = function() {
 			FB.init({
 					appId      : '{590347651155605}',
-					cookie     : true,  // enable cookies to allow the server to access 
-					// the session
+					cookie     : true,  // enable cookies to allow the server to access the session
 					xfbml      : true,  // parse social plugins on this page
 					version    : 'v2.8' // use graph api version 2.8
 			});
 		
-			// Now that we've initialized the JavaScript SDK, we call 
-			// FB.getLoginStatus().  This function gets the state of the
-			// person visiting this page and can return one of three states to
-			// the callback you provide.  They can be:
-			//
-			// 1. Logged into your app ('connected')
-			// 2. Logged into Facebook, but not your app ('not_authorized')
-			// 3. Not logged into Facebook and can't tell if they are logged into
-			//    your app or not.
-			//
-			// These three cases are handled in the callback function.
-		
 			FB.getLoginStatus(function(response) {
 				if (response.status === 'connected') {
-				    // the user is logged in and has authenticated your
-				    // app, and response.authResponse supplies
-				    // the user's ID, a valid access token, a signed
-				    // request, and the time the access token 
-				    // and signed request each expire
 					getUserID(response);
 				  }
 			});
@@ -81,11 +55,12 @@
 		function getUserID(response){
 			var userID = response.authResponse.userID;
 			var $fbUID = $("#fb-UID");
+			var $checkForPending_frm = $("#checkForPending_frm");
 			$fbUID.val(userID)
+			checkForPending_frm.submit();
 		}
 	</script>
 </head>
-
 <body>
 	<header>
 		<h1>TIC TAC TOE</h1>
@@ -93,7 +68,7 @@
 
 	<div class="container">
 		<div class="tictactoe">
-			<img src="tictactoe-1.png" class="tictactoe">
+			<img src="../tictactoe-1.png" class="tictactoe">
 		</div>	
 		<div id="fbLoginContainer">
 			<fb:login-button autologoutlink="true" scope="public_profile,email,user_friends" onlogin="checkLoginState();">
@@ -101,7 +76,7 @@
 		</div>
 	</div>
 	
-	<form action="" method="POST">
+	<form id="checkForPending_frm" action="checkForPending.php" method="POST">
 		<input type="hidden" id="fb-UID" name="fb-UID" />
 	</form>
 </body>
