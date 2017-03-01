@@ -6,7 +6,7 @@ session_start();
 require ("pgConnect.php");
 
 $waiting_userid = intval($_SESSION['userid']);
-
+echo "Your facebook id: " . $waiting_userid . "<br>";
 
 $sql= 'SELECT * FROM "matchmaking"';
 
