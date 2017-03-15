@@ -54,6 +54,7 @@
 		
 		function getUserID(response){
 			var userID = response.authResponse.userID;
+			alert(userID);
 			var $fbUID = $("#fb-UID");
 			var $checkForPending_frm = $("#checkForPending_frm");
 			$fbUID.val(userID)
@@ -76,7 +77,7 @@
 		</div>
 	</div>
 	
-	<form id="checkForPending_frm" action="./pages/checkForPending.php" method="POST">
+	<form id="checkForPending_frm" action="./public/checkForPending.php" method="POST">
 		<input type="hidden" id="fb-UID" name="fb-UID" />
 	</form>
 </body>
