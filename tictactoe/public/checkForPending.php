@@ -1,6 +1,6 @@
 <?php
 session_start();
-$fbuid = intval($_REQUEST["fb-UID"]);
+$fbuid = intval($_REQUEST["fbuid"]);
 if(intval($fbuid) == 0){
 	header("Location: ../");
 }
@@ -121,7 +121,7 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 				
 			$(document).on("click",".btn-find-match", function ()
 				{			
-				
+					checkMatchFound();
 					//enter user as pending in database  
 					firebase.database().ref('pending-match/' + fbuid).set({
 							fbuid: fbuid,
@@ -197,6 +197,7 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 			function startCheckingForMatch()
 			{
 				$(document).find('.find-match-searching-image-span').html('<img style="max-height:25px;" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif">');
+				checkMatchFound();
 				checkMatchFoundTimer = setInterval(checkMatchFound, 5000);				
 			}
 			
@@ -212,10 +213,11 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 				
 							var activeMatch = snapshot.val().activeMatch;	
 							if (activeMatch != undefined || activeMatch != "")
-							{
-								abortTimer();
+							{								
 								var matchIdsArray = activeMatch.split('vs');
 								$(document).find('.find-match-div').html("<img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[0]+"/picture?type=large'> vs <img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[1]+"/picture?type=large'>");
+								window.location = "currentGame.php?activeMatch="+activeMatch+"&player1="+matchIdsArray[0]+"&player2="+matchIdsArray[1]+"&fbuid="+fbuid;
+								abortTimer();
 							}					
 						}
 						catch (err)
