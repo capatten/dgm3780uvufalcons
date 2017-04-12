@@ -1,6 +1,6 @@
 <?php
 session_start();
-$fbuid = $_REQUEST["fb-UID"];
+$fbuid = intval($_REQUEST["fb-UID"]);
 if(intval($fbuid) == 0){
 	header("Location: ../");
 }
@@ -206,14 +206,22 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 				console.log("Checking if match was found..");
 				
 				return firebase.database().ref('/users/' + fbuid).once('value').then(function(snapshot) {
-						var activeMatch = snapshot.val().activeMatch;	
-						if (activeMatch != undefined || activeMatch != "")
+						try
 						{
-							abortTimer();
-							var matchIdsArray = activeMatch.split('vs');
-							$(document).find('.find-match-div').html("<img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[0]+"/picture?type=large'> vs <img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[1]+"/picture?type=large'>");
-						}					
-								  
+					
+				
+							var activeMatch = snapshot.val().activeMatch;	
+							if (activeMatch != undefined || activeMatch != "")
+							{
+								abortTimer();
+								var matchIdsArray = activeMatch.split('vs');
+								$(document).find('.find-match-div').html("<img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[0]+"/picture?type=large'> vs <img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[1]+"/picture?type=large'>");
+							}					
+						}
+						catch (err)
+						{
+					
+						}	  
 					});
 			}
 			function abortTimer() { // to be called when you want to stop the timer
@@ -239,7 +247,7 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 		<br>
 		<br>
 		<div class="find-match-div">
-		<span class="find-match-searching-image-span"></span><button class="btn-find-match">Find Match</button>
+			<span class="find-match-searching-image-span"></span><button class="btn-find-match">Find Match</button>
 		</div>
 	</body>
 </html>
