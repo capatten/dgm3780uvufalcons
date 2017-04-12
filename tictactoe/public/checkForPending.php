@@ -215,7 +215,7 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 							if (activeMatch != undefined || activeMatch != "")
 							{								
 								var matchIdsArray = activeMatch.split('vs');
-								$(document).find('.find-match-div').html("<img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[0]+"/picture?type=large'> vs <img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[1]+"/picture?type=large'>");
+								$(document).find('.find-match-div').html(matchIdsArray[0]+"<img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[0]+"/picture?type=large'> vs "+matchIdsArray[1]+"<img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[1]+"/picture?type=large'>");
 								window.location = "currentGame.php?activeMatch="+activeMatch+"&player1="+matchIdsArray[0]+"&player2="+matchIdsArray[1]+"&fbuid="+fbuid;
 								abortTimer();
 							}					
