@@ -235,7 +235,7 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 
 		</script>
 	</head>
-	<body>
+	<body class="checkForPending">
 		<!--<input class="txtEmail" type="text" placeholder="Email" value="encoreeric@gmail.com">
 		<input class="txtPassword" type="text" placeholder="Password" value="testtt">
 		<br>

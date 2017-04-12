@@ -47,20 +47,6 @@ button{
 	margin-top:20px;
 }
 
-
-/* Big button
-    margin: 0 auto;
-    display: block;
-    width: 300px;
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    font-size: 26px;
-    background-color: cornflowerblue;
-    color: lightgray;
-    text-transform: uppercase;
-*/
-
 #loading-wrapper {
   position: fixed;
   width: 100%;
@@ -171,4 +157,31 @@ button{
     -ms-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+
+
+/*Check For Pending Page*/
+body.checkForPending{
+    background-color: lightgrey;
+}
+
+body.checkForPending img{
+    max-height: 100px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 100%;
+}
+
+.btn-find-match{
+    margin: 0 auto;
+    display: block;
+    width: 300px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    font-size: 26px;
+    background-color: cornflowerblue;
+    color: lightgray;
+    text-transform: uppercase;
 }
