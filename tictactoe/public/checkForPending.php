@@ -1,8 +1,7 @@
 <?php
 session_start();
 $fbuid = $_REQUEST["fb-UID"];
-if (intval($fbuid) == 0)
-{
+if(intval($fbuid) == 0){
 	header("Location: ../");
 }
 
@@ -118,8 +117,109 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 				{			  
 					return firebase.database().ref('/users/' + fbuid).remove();
 				});
+				
+				
+			$(document).on("click",".btn-find-match", function ()
+				{			
+				
+					//enter user as pending in database  
+					firebase.database().ref('pending-match/' + fbuid).set({
+							fbuid: fbuid,
+							time: Math.floor(Date.now() / 1000)
+						});
+						
+						
+					var player1 = "";
+					var player2 = "";
+					//match all possible pending users
+					return firebase.database().ref('/pending-match').once('value').then(function(snapshot) {
+							//load all users that are pending a match.
+							//console.log(snapshot.val());
+													
+													
+							//iterate through users pending match
+							
+							
+							
+							//$.each( obj, function( key, value ) {
+							$.each( snapshot.val(), function( key, value ) {
+									if (value['fbuid'] != undefined || value['fbuid'] != "")
+									{
+										console.log('Working with id: ' + value['fbuid']);
+										if (player1 == "")
+										{
+											player1 = value['fbuid'];
+										}
+										else if (player2 == "")
+										{
+											player2 = value['fbuid'];
+										}
+									
+										if (player1 != "" && player2 != "")
+										{
+											//2 players populated - remove them from pending
+											console.log('Matched: ' + player1 + ' with: ' + player2);
+											removePlayerFromPending(player1);
+											removePlayerFromPending(player2);
+											
+											// add players to a match
+											addPlayersToMatch(player1,player2);
+											
+											player1 = "";
+											player2 = "";
+										}
+									
+									}
+								});
+							startCheckingForMatch();
+						});					
+				});
 	 
-
+			function removePlayerFromPending(userFBUID)
+			{
+				return firebase.database().ref('/pending-match/' + userFBUID).remove();
+			}
+			
+			function addPlayersToMatch(player1, player2)
+			{
+				firebase.database().ref('activeMatches/' + player1 + 'vs' + player2).set({
+						player1: player1,
+						player2: player2
+					});
+				firebase.database().ref('users/' + player1).set({
+						activeMatch: player1 + 'vs' + player2
+					});
+				firebase.database().ref('users/' + player2).set({
+						activeMatch: player1 + 'vs' + player2
+					});
+			}
+			
+			function startCheckingForMatch()
+			{
+				$(document).find('.find-match-searching-image-span').html('<img style="max-height:25px;" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif">');
+				checkMatchFoundTimer = setInterval(checkMatchFound, 5000);				
+			}
+			
+			// set interval
+			var checkMatchFoundTimer;
+			function checkMatchFound() {
+				console.log("Checking if match was found..");
+				
+				return firebase.database().ref('/users/' + fbuid).once('value').then(function(snapshot) {
+						var activeMatch = snapshot.val().activeMatch;	
+						if (activeMatch != undefined || activeMatch != "")
+						{
+							abortTimer();
+							var matchIdsArray = activeMatch.split('vs');
+							$(document).find('.find-match-div').html("<img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[0]+"/picture?type=large'> vs <img style='max-height:100px;' src='https://graph.facebook.com/"+matchIdsArray[1]+"/picture?type=large'>");
+						}					
+								  
+					});
+			}
+			function abortTimer() { // to be called when you want to stop the timer
+				clearInterval(checkMatchFoundTimer);
+			}
+			
 	 
 		
 
@@ -136,5 +236,10 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 		<button class="btn-savedata">send data</button>
 		<button class="btn-loaddata">load data</button>
 		<button class="btn-removedata">remove data</button>
+		<br>
+		<br>
+		<div class="find-match-div">
+		<span class="find-match-searching-image-span"></span><button class="btn-find-match">Find Match</button>
+		</div>
 	</body>
 </html>
