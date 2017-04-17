@@ -1,0 +1,21 @@
+div.container {
+  text-align: center;
+}
+
+span {
+  font-size: 150px;
+}
+
+div.col2 {
+	border-left: 2px solid #000;
+	border-right: 2px solid #000;
+}
+
+div.row2 div {
+	border-top: 2px solid #000;
+	border-bottom: 2px solid #000;
+}
+
+div.moveArea:hover {
+	cursor: pointer;
+}
