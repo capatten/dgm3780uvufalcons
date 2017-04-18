@@ -182,9 +182,13 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 			
 			function addPlayersToMatch(player1, player2)
 			{
+				matchString = '$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;';
+				
 				firebase.database().ref('activeMatches/' + player1 + 'vs' + player2).set({
 						player1: player1,
-						player2: player2
+						player2: player2,
+						whoseTurn: player1,
+						matchString: matchString
 					});
 				firebase.database().ref('users/' + player1).set({
 						activeMatch: player1 + 'vs' + player2
@@ -243,9 +247,9 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 		<br>
 		<button class="btn-register">Register</button>
 		<button class="btn-forgot">Forgot</button>-->
-		<button class="btn-savedata">send data</button>
+		<!--<button class="btn-savedata">send data</button>
 		<button class="btn-loaddata">load data</button>
-		<button class="btn-removedata">remove data</button>
+		<button class="btn-removedata">remove data</button>-->
 		<br>
 		<br>
 		<div class="find-match-div">
