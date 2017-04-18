@@ -14,7 +14,8 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Welcome to Firebase Hosting</title>
+		<title>Tic Tac Toe</title>
+        <link rel="icon" href="../assets/img/tictactoe-1.png">
 		<style media="screen"></style>
 		<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
