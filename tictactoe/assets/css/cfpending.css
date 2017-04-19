@@ -2,6 +2,7 @@
 	font-family: 'Bahiana', cursive;
     font-size: 48px;
     height: 100vh;
+	text-align:center;
     background: #004e64; /* Old browsers */
     background: -moz-linear-gradient(top, #004e64 0%, #25a18e 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, #004e64 0%,#25a18e 100%); /* Chrome10-25,Safari5.1-6 */
