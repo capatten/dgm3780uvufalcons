@@ -56,7 +56,7 @@
 		function getUserID(response){
 			var userID = response.authResponse.userID;
 			var firstName = response.authResponse.first_name;
-			console.log(response.authResponse);
+			console.log(firstName);
 			var $fbUID = $("#fbuid");
 			var $checkForPending_frm = $("#checkForPending_frm");
 			$fbUID.val(userID)
