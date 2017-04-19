@@ -183,7 +183,7 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 			
 			function addPlayersToMatch(player1, player2)
 			{
-				matchString = '$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;'+','+'$nbsp;';
+				matchString = '&nbsp;'+','+'&nbsp;'+','+'&nbsp;'+','+'&nbsp;'+','+'&nbsp;'+','+'&nbsp;'+','+'&nbsp;'+','+'&nbsp;'+','+'&nbsp;';
 				
 				firebase.database().ref('activeMatches/' + player1 + 'vs' + player2).set({
 						player1: player1,

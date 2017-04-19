@@ -1,3 +1,9 @@
+<?php
+
+	 $player1 = htmlspecialchars($_GET['player1']);
+	 $player2 = htmlspecialchars($_GET['player2']);
+?>
+
 <!--------------------------------- BOOTSTRAP CSS --------------------------------->
 <link href="../assets/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -5,7 +11,7 @@
 <link href="../assets/css/public/currentGame.css" rel="stylesheet">
 	
 <h1>Current Game</h1><span  class='vsDisplay'></span>
-<br>Turn: <span class='turnDisplaySpan'></span><br>
+<br>Turn: <span class='turnDisplaySpan'><img style='max-height:100px;' src='https://graph.facebook.com/<?php echo $player1; ?>/picture?type=large'> VS <img style='max-height:100px;' src='https://graph.facebook.com/<?php echo $player2; ?>/picture?type=large'></span><br>
 
 <div class="container">
 	<div class="row row1">
@@ -77,9 +83,7 @@
 				} catch (e) {		
 				}
 				try{
-					whoseTurn = snapshot.val().whoseTurn;
-					
-					$(document).find('.vsDisplay').html("<img style='max-height:100px;' src='https://graph.facebook.com/"+$player1+"/picture?type=large'>" + " VS " + "<img style='max-height:100px;' src='https://graph.facebook.com/"+$player2+"/picture?type=large'>");		
+					whoseTurn = snapshot.val().whoseTurn;	
 						
 					$(document).find('.turnDisplaySpan').html("<img style='max-height:100px;' src='https://graph.facebook.com/"+whoseTurn+"/picture?type=large'>");				
 				} catch (e) {	
@@ -123,9 +127,9 @@
 </script>
 		
 <script>
-	var $fbuid = <?php echo htmlspecialchars($_GET['fbuid']); ?>;
-	var $player1 = <?php echo htmlspecialchars($_GET['player1']); ?>;
-	var $player2 = <?php echo htmlspecialchars($_GET['player2']); ?>;
+	var $fbuid = <?php echo $_GET['fbuid']; ?>;
+	var $player1 = <?php echo $_GET['player1']; ?>;
+	var $player2 = <?php echo $_GET['player2']; ?>;
 	var $otherPlayersFbuid = ($fbuid == $player1) ? $player2 : $player1; 
 	var $sgn = "";
 	var $sgn_string = "";
