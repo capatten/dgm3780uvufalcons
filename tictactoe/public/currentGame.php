@@ -64,7 +64,7 @@
 	
 	var matchString;
 	var whoseTurn;
-	var whoWon;
+	var whoWon = "";
 	function loadTurnData()
 	{
 		return firebase.database().ref('activeMatches/' + $player1 + 'vs' + $player2).once('value').then(function(snapshot) {
@@ -91,7 +91,8 @@
 				}
 				try{
 					whoWon = snapshot.val().whoWon;					
-				} catch (e) {		
+				} catch (e) {	
+					whoWon = "";	
 				}
 				console.log('Match Array: ' + matchString);	  
 			});
@@ -102,7 +103,7 @@
 		/*var r1c1 = $(document).find('#r1c1');
 		r1c1 = $(r1c1).find('span').html();*/
 		
-		if (whoseTurn == $fbuid)
+		if (whoseTurn == $fbuid && whoWon == "")
 		{
 			whoseTurn = $otherPlayersFbuid;
 			
@@ -135,6 +136,7 @@
 	var $sgn_string = "";
 	var $signCount = 0;
 	var $moveArea = $(".moveArea");
+	var $winner = "";
 
 	$(document).ready(function(){
 			//if statement to assign sign value
@@ -211,8 +213,38 @@
 		}
 	}
 	function endGame(){
-		$moveArea.each(function({
-			$(this).removeClass("moveArea");
-		})
+		//submitWinner();
 	};
+
+	function submitWinner()
+	{
+
+		firebase.database().ref('activeMatches/' + $player1 + 'vs' + $player2).set({
+			whoWon: fbuid
+		})
+		/*var r1c1 = $(document).find('#r1c1');
+		r1c1 = $(r1c1).find('span').html();*/
+		
+		/*if (whoseTurn == $fbuid)
+		{
+			whoseTurn = $otherPlayersFbuid;
+			
+			var r1c1 = $(document).find('#r1c1').find('span').html();
+			var r1c2 = $(document).find('#r1c2').find('span').html();
+			var r1c3 = $(document).find('#r1c3').find('span').html();
+			var r2c1 = $(document).find('#r2c1').find('span').html();
+			var r2c2 = $(document).find('#r2c2').find('span').html();
+			var r2c3 = $(document).find('#r2c3').find('span').html();
+			var r3c1 = $(document).find('#r3c1').find('span').html();
+			var r3c2 = $(document).find('#r3c2').find('span').html();
+			var r3c3 = $(document).find('#r3c3').find('span').html();
+			
+			matchString = r1c1+','+r1c2+','+r1c3+','+r2c1+','+r2c2+','+r2c3+','+r3c1+','+r3c2+','+r3c3;
+			
+			firebase.database().ref('activeMatches/' + $player1 + 'vs' + $player2).set({
+					matchString: matchString,
+					whoseTurn: $otherPlayersFbuid
+				});
+		}*/
+	}
 </script>
