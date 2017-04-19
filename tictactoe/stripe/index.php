@@ -1,20 +1,77 @@
 <?php
-    require_once("config.php");
+session_start();
+$fbuid = intval($_REQUEST["fbuid"]);
+$_SESSION["fbuid"] = $fbuid;
+if(intval($fbuid) == 0){
+	header("Location: ../");
+}
+
+echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/picture?type=large'>  User Id: " . $fbuid . "<br>";
+?>
+<?php
+require_once("config.php");
 ?>
 
 
 <!DOCTYPE HTML>
 <html>
-<head>
-    <title>Tic Tac Toe Payment</title>
-</head>
+	<head>
+		<title>Tic Tac Toe Payment</title>
+		
+		<script>
+			var fbuid = "<?php echo "$fbuid" ?>";
+		</script>
+		
+		<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+		<script>
+			// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyALwnsnwRHcliN-8rdC89tfYAQ2HIyeZHI",
+				authDomain: "uvu-falcons.firebaseapp.com",
+				databaseURL: "https://uvu-falcons.firebaseio.com",
+				storageBucket: "uvu-falcons.appspot.com",
+				messagingSenderId: "515391920741"
+			};
+			firebase.initializeApp(config);
+			
+			$(document).ready(function(){
+				
+					return firebase.database().ref('/users/' + fbuid).once('value').then(function(snapshot) {
+							
+							try{
+								var paid = snapshot.val().paid;
+						
+								if (paid == "true")
+								{
+									window.location.href = "/public/checkForPending.php?fbuid=<?php echo $fbuid; ?>";
+								}
+							} catch (e ) {
+								
+							}
+
+				  
+						});
+				});
+				
+			
+			
+			
+			
+		</script>
+
+	</head>
     
-<body>            
-        <!-- Stripe API -->
-        <h1>Payment</h1>
+	<body>            
+		<!-- Stripe API -->
+		<h1>Payment</h1>
         
-        <form action="charge.php" method="POST">
-          <script
+		<form action="charge.php" method="POST">
+			<script
                 type="text/javascript"
                 src="https://checkout.stripe.com/checkout.js" 
                 class="stripe-button"
@@ -25,6 +82,6 @@
                 data-amount="379"
                 data-locale="auto"
           ></script>
-        </form>
-</body>
+		</form>
+	</body>
 </html>
