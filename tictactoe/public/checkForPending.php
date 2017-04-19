@@ -15,6 +15,7 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 	<head>
 		<meta charset="utf-8">
 		<title>Tic Tac Toe</title>
+       <link href="../assets/css/cfpending.css" rel="stylesheet" type="text/css">
         <link rel="icon" href="../assets/img/tictactoe-1.png">
 		<style media="screen"></style>
 		<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
