@@ -202,7 +202,7 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 			
 			function startCheckingForMatch()
 			{
-				$(document).find('.find-match-searching-image-span').html('<img style="max-height:25px;" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif">');
+				$(document).find('.find-match-searching-image-span').html('<img style="max-height:60px;" src="https://media.giphy.com/media/u3ixOBgotIfMQ/giphy.gif">');
 				checkMatchFound();
 				checkMatchFoundTimer = setInterval(checkMatchFound, 5000);				
 			}
