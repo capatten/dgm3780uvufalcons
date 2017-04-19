@@ -161,14 +161,14 @@
 				$sgn_string = ".sign_" + $sgn.toLowerCase(); // create class string
 				$signCount = $($sgn_string).length; // count number of classes 
 
-				// if number of class cound is greater then 2, then look for winner
 				submitMoveData();
+				
+				// if number of class cound is greater then 2, then look for winner
 				if($signCount > 2){
 					checkRowWin(); //look for horizontal win
 					checkColWin(); //look for vertical win
 					checkDiagWin(); //look for diagonal win
 				}
-				
 				whoseTurn = "other";
 			}
 			else
@@ -210,5 +210,9 @@
 			}
 		}
 	}
-	
+	function endGame(){
+		$moveArea.each(function({
+			$(this).removeClass("moveArea");
+		})
+	};
 </script>
