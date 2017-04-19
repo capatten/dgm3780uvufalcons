@@ -61,6 +61,7 @@ if($rowCount == 0){
 <head>
 	<meta charset="utf-8">
 	<title>Tic Tac Toe</title>
+    <link rel="icon" href="../assets/img/tictactoe-1.png">
 	<link href="https://fonts.googleapis.com/css?family=Bahiana" rel="stylesheet">
 	<link href="./assets/css/phone-default.css" rel="stylesheet">
 	<script
@@ -127,7 +128,7 @@ if($rowCount == 0){
 
 	<div class="container">
 		<div class="tictactoe">
-			<img src="./assets/img/tictactoe-1.png" class="tictactoe">
+			<img src="../assets/img/tictactoe-1.png" class="tictactoe">
 		</div>	
 		<div id="fbLoginContainer">
 			<fb:login-button autologoutlink="true" scope="public_profile,email,user_friends" onlogin="checkLoginState();">

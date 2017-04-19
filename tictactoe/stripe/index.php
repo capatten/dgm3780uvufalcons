@@ -72,6 +72,24 @@ require_once("config.php");
         
 		<form action="charge.php" method="POST">
 			<script
+=======
+<head>
+    <title>Tic Tac Toe</title>
+    <link rel="icon" href="../assets/img/tictactoe-1.png">
+    
+    <link href="../assets/css/stripe.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Bahiana" rel="stylesheet">
+	<link href="./assets/css/phone-default.css" rel="stylesheet">
+    
+</head>
+    
+<body class="stripeBody">            
+        <!-- Stripe API -->
+        <h1>Payment</h1>
+        
+        <form action="charge.php" method="POST" class="paymentButton">
+          <script
+>>>>>>> 5bbbd6a054705f0d0d77a3d2ee30bacea08ddf58
                 type="text/javascript"
                 src="https://checkout.stripe.com/checkout.js" 
                 class="stripe-button"
