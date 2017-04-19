@@ -209,9 +209,5 @@
 			}
 		}
 	}
-	function endGame(){
-		$moveArea.each(function({
-			$(this).removeClass("moveArea");
-		})
-	};
+	
 </script>
