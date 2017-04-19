@@ -103,7 +103,7 @@ $player2 = htmlspecialchars($_GET['player2']);
 						}
 						else
 						{
-							$(document).find('.winner-div').html("<img style='max-height:100px;' src='https://graph.facebook.com/"+"cat"+"/picture?type=large'> is the winner! <button class='play-again-btn'>Play Again!</button>");	
+							$(document).find('.winner-div').html("<img style='max-height:100px;' src='https://graph.facebook.com/"+whoWon+"/picture?type=large'> is the winner! <button class='play-again-btn'>Play Again!</button>");	
 						}
 								
 					}
