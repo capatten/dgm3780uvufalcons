@@ -5,7 +5,7 @@ if(intval($fbuid) == 0){
 	header("Location: ../");
 }
 
-echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/picture?type=large'>  User Id: " . $fbuid . "<br>";
+echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/picture?type=large'>";
 ?>
 <script>
 	var fbuid = "<?php echo "$fbuid" ?>";

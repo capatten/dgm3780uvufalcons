@@ -12,7 +12,7 @@
     margin: 0 auto;
     display: block;
     border-radius: 50%;
-    width: 50%;
+    
 }
 h1{
     text-align: center;
@@ -23,4 +23,10 @@ button.btn-find-match{
     margin: 0 auto;
     display: block;
     text-align: center;
+	background-color:black;
+	padding:10px;
+	color:white;
+	border-radius:8px;
+	border:1px solid black;
+	font-family:'Bahiana', cursive;
 }
