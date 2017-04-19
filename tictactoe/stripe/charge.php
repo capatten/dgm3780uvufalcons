@@ -59,11 +59,13 @@ $charge = \Stripe\Charge::create(array(
 							fbuid: fbuid,
 							paid: "true"
 						});
-						
-					window.location.href = "../public/checkForPending.php?fbuid=<?php echo $fbuid; ?>";
+					
 				});
 
-			
+			function savedPayment()
+			{
+				window.location.href = "../public/checkForPending.php?fbuid=<?php echo $fbuid; ?>";
+			}
 			
 			
 		</script>
