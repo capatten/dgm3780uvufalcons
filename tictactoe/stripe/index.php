@@ -6,14 +6,20 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Tic Tac Toe Payment</title>
+    <title>Tic Tac Toe</title>
+    <link rel="icon" href="../assets/img/tictactoe-1.png">
+    
+    <link href="../assets/css/stripe.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Bahiana" rel="stylesheet">
+	<link href="./assets/css/phone-default.css" rel="stylesheet">
+    
 </head>
     
-<body>            
+<body class="stripeBody">            
         <!-- Stripe API -->
         <h1>Payment</h1>
         
-        <form action="charge.php" method="POST">
+        <form action="charge.php" method="POST" class="paymentButton">
           <script
                 type="text/javascript"
                 src="https://checkout.stripe.com/checkout.js" 
