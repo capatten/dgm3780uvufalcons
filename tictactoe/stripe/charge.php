@@ -53,12 +53,38 @@ $charge = \Stripe\Charge::create(array(
 			};
 			firebase.initializeApp(config);
 			
+			var paid = false;
+			
 			$(document).ready(function(){
 				
 					firebase.database().ref('users/' + fbuid).set({
 							fbuid: fbuid,
 							paid: "true"
 						});
+					
+					while (paid != true)
+					{
+						firebase.database().ref('users/' + fbuid).set({
+							fbuid: fbuid,
+							paid: "true"
+						});
+						
+						return firebase.database().ref('/users/' + fbuid).once('value').then(function(snapshot) {
+							
+							try{
+								paid = snapshot.val().paid;
+						
+								if (paid == "true")
+								{
+									window.location.href = "../public/checkForPending.php?fbuid=<?php echo $fbuid; ?>";
+								}
+							} catch (e ) {
+								
+							}
+
+				  
+						});
+					}
 					
 				});
 

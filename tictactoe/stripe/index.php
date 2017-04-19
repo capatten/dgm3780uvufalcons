@@ -1,6 +1,6 @@
 <?php
 session_start();
-$fbuid = intval($_REQUEST["fbuid"]);
+$fbuid = htmlspecialchars($_REQUEST["fbuid"]);
 $_SESSION["fbuid"] = $fbuid;
 if(intval($fbuid) == 0){
 	header("Location: ../");
