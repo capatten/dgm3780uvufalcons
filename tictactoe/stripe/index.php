@@ -26,47 +26,6 @@ require_once("config.php");
 			var fbuid = "<?php echo "$fbuid" ?>";
 		</script>
 		
-		<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
-		<script>
-			// Initialize Firebase
-			var config = {
-				apiKey: "AIzaSyALwnsnwRHcliN-8rdC89tfYAQ2HIyeZHI",
-				authDomain: "uvu-falcons.firebaseapp.com",
-				databaseURL: "https://uvu-falcons.firebaseio.com",
-				storageBucket: "uvu-falcons.appspot.com",
-				messagingSenderId: "515391920741"
-			};
-			firebase.initializeApp(config);
-			
-			$(document).ready(function(){
-				
-					return firebase.database().ref('/users/' + fbuid).once('value').then(function(snapshot) {
-							
-							try{
-								var paid = snapshot.val().paid;
-						
-								if (paid == "true")
-								{
-									window.location.href = "/public/checkForPending.php?fbuid=<?php echo $fbuid; ?>";
-								}
-							} catch (e ) {
-								
-							}
-
-				  
-						});
-				});
-				
-			
-			
-			
-			
-		</script>
 
 	</head>
     

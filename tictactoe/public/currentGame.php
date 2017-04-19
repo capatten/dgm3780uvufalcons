@@ -162,12 +162,13 @@
 				$signCount = $($sgn_string).length; // count number of classes 
 
 				// if number of class cound is greater then 2, then look for winner
+				submitMoveData();
 				if($signCount > 2){
 					checkRowWin(); //look for horizontal win
 					checkColWin(); //look for vertical win
 					checkDiagWin(); //look for diagonal win
 				}
-				submitMoveData();
+				
 				whoseTurn = "other";
 			}
 			else
@@ -183,6 +184,7 @@
 		  
 		if( row1_count == 3 || row2_count == 3 || row3_count == 3 ){
 			alert("Horizontal Winner");
+			endGame();
 		}
 	}
 
@@ -193,6 +195,7 @@
 		  
 		if( col1_count == 3 || col2_count == 3 || col3_count == 3 ){
 			alert("Vertical winner");
+			endGame();
 		}
 	}
 
@@ -200,9 +203,12 @@
 		if($("#r2c2").find('span' + $sgn_string).length !== 0 ){
 			if(($("#r1c1").find('span' + $sgn_string).length !== 0 && $("#r3c3").find('span' + $sgn_string).length !== 0 )){
 				alert("Diagnal LR winner");
+				endGame();
 			}else if($("#r1c3").find('span' + $sgn_string).length !== 0 && $("#r3c1").find('span' + $sgn_string).length !== 0 ){
 				alert("Diagnal RL winner");
+				endGame();
 			}
 		}
 	}
+	
 </script>
