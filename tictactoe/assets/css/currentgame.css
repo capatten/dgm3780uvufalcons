@@ -16,7 +16,7 @@ p{
 	color:white;	
 }
 button.play-again-btn{
-	margin: 0 auto;
+	margin: 2em auto;
     display: block;
     text-align: center;
 	background-color:black;
@@ -26,6 +26,6 @@ button.play-again-btn{
 	border:1px solid black;
 	font-family:'Bahiana', cursive;
 }
-div.container{
-	color:white;
+img{
+	border-radius:25px;
 }

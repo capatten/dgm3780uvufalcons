@@ -12,8 +12,8 @@ div.col2 {
 }
 
 div.row2 div {
-	border-top: 2px solid #000;
-	border-bottom: 2px solid #000;
+	border-top: 2px solid #fff;
+	border-bottom: 2px solid #fff;
 }
 
 div.moveArea:hover {

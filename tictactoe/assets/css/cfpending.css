@@ -12,8 +12,13 @@
 .checkForPending img{
     margin: 0 auto;
     display: block;
-    border-radius: 50%;
+    border-radius: 25px;
     
+}
+img.gif{
+	border-radius:0px;
+	margin:0 auto;
+	padding-bottom:10px;
 }
 h1{
     text-align: center;
