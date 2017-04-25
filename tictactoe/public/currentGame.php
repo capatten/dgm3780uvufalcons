@@ -1,7 +1,7 @@
 <?php
 
-	 $player1 = htmlspecialchars($_GET['player1']);
-	 $player2 = htmlspecialchars($_GET['player2']);
+$player1 = htmlspecialchars($_GET['player1']);
+$player2 = htmlspecialchars($_GET['player2']);
 ?>
 
 <!--------------------------------- BOOTSTRAP CSS --------------------------------->
@@ -11,7 +11,11 @@
 <link href="../assets/css/public/currentGame.css" rel="stylesheet">
 <link href="../assets/css/currentgame.css" rel="stylesheet">	
 <h1>Current Game</h1><span  class='vsDisplay'></span>
-<br>Turn: <span class='turnDisplaySpan'><img style='max-height:100px;' src='https://graph.facebook.com/<?php echo $player1; ?>/picture?type=large'> VS <img style='max-height:100px;' src='https://graph.facebook.com/<?php echo $player2; ?>/picture?type=large'></span><br>
+
+<img style='max-height:100px;' src='https://graph.facebook.com/<?php echo $player1; ?>/picture?type=large'> VS <img style='max-height:100px;' src='https://graph.facebook.com/<?php echo $player2; ?>/picture?type=large'><br>
+
+
+<br><br><div class="winner-div">Turn: <span class='turnDisplaySpan'></span></div>
 
 <div class="container">
 	<div class="row row1">
@@ -64,7 +68,7 @@
 	
 	var matchString;
 	var whoseTurn;
-	var whoWon;
+	var whoWon = "";
 	function loadTurnData()
 	{
 		return firebase.database().ref('activeMatches/' + $player1 + 'vs' + $player2).once('value').then(function(snapshot) {
@@ -90,10 +94,24 @@
 					whoseTurn = $fbuid;	
 				}
 				try{
-					whoWon = snapshot.val().whoWon;					
-				} catch (e) {		
+					whoWon = snapshot.val().whoWon + "";
+					if (whoWon != "" && whoWon != "undefined")
+					{	
+						if (whoWon == "NA")
+						{
+							$(document).find('.winner-div').html("No one is the winner! <button class='play-again-btn'>Play Again!</button>");		
+						}
+						else
+						{
+							$(document).find('.winner-div').html("<img style='max-height:100px;' src='https://graph.facebook.com/"+whoWon+"/picture?type=large'> is the winner! <button class='play-again-btn'>Play Again!</button>");	
+						}
+								
+					}
+				} catch (e) {	
+					whoWon = "";	
+	
 				}
-				console.log('Match Array: ' + matchString);	  
+
 			});
 	}
 	
@@ -102,7 +120,7 @@
 		/*var r1c1 = $(document).find('#r1c1');
 		r1c1 = $(r1c1).find('span').html();*/
 		
-		if (whoseTurn == $fbuid)
+		if (whoseTurn == $fbuid && whoWon == "" || whoWon == "undefined")
 		{
 			whoseTurn = $otherPlayersFbuid;
 			
@@ -127,14 +145,15 @@
 </script>
 		
 <script>
-	var $fbuid = <?php echo $_GET['fbuid']; ?>;
-	var $player1 = <?php echo $_GET['player1']; ?>;
-	var $player2 = <?php echo $_GET['player2']; ?>;
+	var $fbuid = "<?php echo $_GET['fbuid']; ?>";
+	var $player1 = "<?php echo $_GET['player1']; ?>";
+	var $player2 = "<?php echo $_GET['player2']; ?>";
 	var $otherPlayersFbuid = ($fbuid == $player1) ? $player2 : $player1; 
 	var $sgn = "";
 	var $sgn_string = "";
 	var $signCount = 0;
 	var $moveArea = $(".moveArea");
+	var $winner = "";
 
 	$(document).ready(function(){
 			//if statement to assign sign value
@@ -146,12 +165,14 @@
 		});
 
 	$moveArea.on('click', function(){
+		
 			if ($(this).find('span').html() != '&nbsp;')
 			{
 				return null;
 			}
 			if (whoseTurn == $fbuid)
 			{
+				
 				var className = "sign_"+$sgn; //create variable to hold className to be assigned when user makes move
 
 				$(this).find('span').addClass(className); //add the class name to the span in the area clicked
@@ -161,13 +182,29 @@
 				$sgn_string = ".sign_" + $sgn.toLowerCase(); // create class string
 				$signCount = $($sgn_string).length; // count number of classes 
 
+
 				submitMoveData();
 				
+				
 				// if number of class cound is greater then 2, then look for winner
+				var finalResult = false;
 				if($signCount > 2){
-					checkRowWin(); //look for horizontal win
-					checkColWin(); //look for vertical win
-					checkDiagWin(); //look for diagonal win
+					result = checkRowWin(); //look for horizontal win
+					if (result == true) {
+						finalResult = true;
+					}
+					result = checkColWin(); //look for vertical win
+					if (result == true) {
+						finalResult = true;
+					}
+					result = checkDiagWin(); //look for diagonal win
+					if (result == true) {
+						finalResult = true;
+					}
+					if (finalResult == false)
+					{
+						checkTieGame();
+					}					
 				}
 				whoseTurn = "other";
 			}
@@ -185,7 +222,10 @@
 		if( row1_count == 3 || row2_count == 3 || row3_count == 3 ){
 			alert("Horizontal Winner");
 			endGame();
+			return true;
 		}
+		
+		return false;
 	}
 
 	function checkColWin(){
@@ -196,7 +236,10 @@
 		if( col1_count == 3 || col2_count == 3 || col3_count == 3 ){
 			alert("Vertical winner");
 			endGame();
+			return true;
 		}
+		
+		return false;
 	}
 
 	function checkDiagWin(){
@@ -204,15 +247,103 @@
 			if(($("#r1c1").find('span' + $sgn_string).length !== 0 && $("#r3c3").find('span' + $sgn_string).length !== 0 )){
 				alert("Diagnal LR winner");
 				endGame();
+				return true;
 			}else if($("#r1c3").find('span' + $sgn_string).length !== 0 && $("#r3c1").find('span' + $sgn_string).length !== 0 ){
 				alert("Diagnal RL winner");
 				endGame();
+				return true;
 			}
 		}
+		
+		return false;
 	}
+	
+	function checkTieGame()
+	{
+		var r1c1 = $(document).find('#r1c1').find('span').html();
+		var r1c2 = $(document).find('#r1c2').find('span').html();
+		var r1c3 = $(document).find('#r1c3').find('span').html();
+		var r2c1 = $(document).find('#r2c1').find('span').html();
+		var r2c2 = $(document).find('#r2c2').find('span').html();
+		var r2c3 = $(document).find('#r2c3').find('span').html();
+		var r3c1 = $(document).find('#r3c1').find('span').html();
+		var r3c2 = $(document).find('#r3c2').find('span').html();
+		var r3c3 = $(document).find('#r3c3').find('span').html();
+			
+		matchString = r1c1+','+r1c2+','+r1c3+','+r2c1+','+r2c2+','+r2c3+','+r3c1+','+r3c2+','+r3c3;
+		
+		if (matchString.indexOf("&nbsp") == -1)
+		{
+			submitWinner(tie = true);
+		}
+	}
+	
 	function endGame(){
-		$moveArea.each(function({
-			$(this).removeClass("moveArea");
-		})
+		submitWinner();
 	};
+
+	function submitWinner(tie = false)
+	{
+		var r1c1 = $(document).find('#r1c1').find('span').html();
+		var r1c2 = $(document).find('#r1c2').find('span').html();
+		var r1c3 = $(document).find('#r1c3').find('span').html();
+		var r2c1 = $(document).find('#r2c1').find('span').html();
+		var r2c2 = $(document).find('#r2c2').find('span').html();
+		var r2c3 = $(document).find('#r2c3').find('span').html();
+		var r3c1 = $(document).find('#r3c1').find('span').html();
+		var r3c2 = $(document).find('#r3c2').find('span').html();
+		var r3c3 = $(document).find('#r3c3').find('span').html();
+			
+		matchString = r1c1+','+r1c2+','+r1c3+','+r2c1+','+r2c2+','+r2c3+','+r3c1+','+r3c2+','+r3c3;
+
+		var winnerId = "";
+		if (tie == false)
+		{
+			winnerId = $fbuid;
+		}
+		else
+		{
+			winnerId = "NA";
+		}
+
+		firebase.database().ref('activeMatches/' + $player1 + 'vs' + $player2).set({
+				whoWon: winnerId,
+				matchString: matchString
+			})
+		/*var r1c1 = $(document).find('#r1c1');
+		r1c1 = $(r1c1).find('span').html();*/
+		
+		/*if (whoseTurn == $fbuid)
+		{
+		whoseTurn = $otherPlayersFbuid;
+			
+		var r1c1 = $(document).find('#r1c1').find('span').html();
+		var r1c2 = $(document).find('#r1c2').find('span').html();
+		var r1c3 = $(document).find('#r1c3').find('span').html();
+		var r2c1 = $(document).find('#r2c1').find('span').html();
+		var r2c2 = $(document).find('#r2c2').find('span').html();
+		var r2c3 = $(document).find('#r2c3').find('span').html();
+		var r3c1 = $(document).find('#r3c1').find('span').html();
+		var r3c2 = $(document).find('#r3c2').find('span').html();
+		var r3c3 = $(document).find('#r3c3').find('span').html();
+			
+		matchString = r1c1+','+r1c2+','+r1c3+','+r2c1+','+r2c2+','+r2c3+','+r3c1+','+r3c2+','+r3c3;
+			
+		firebase.database().ref('activeMatches/' + $player1 + 'vs' + $player2).set({
+		matchString: matchString,
+		whoseTurn: $otherPlayersFbuid
+		});
+		}*/
+	}
+	
+	$(document).on('click','.play-again-btn',function() {
+			firebase.database().ref('completedMatches/' + $player1 + 'vs' + $player2).set({
+					whoWon: $fbuid
+				});
+			firebase.database().ref('activeMatches/' + $player1 + 'vs' + $player2).remove();
+			firebase.database().ref('users/' + $player1 + '/activeMatch').remove();
+			firebase.database().ref('users/' + $player2 + '/activeMatch').remove();	
+		
+			window.location = "checkForPending.php?fbuid="+$fbuid;
+		});
 </script>
