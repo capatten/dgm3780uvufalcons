@@ -204,7 +204,7 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 			{
 				$(document).find('.find-match-searching-image-span').html('<img style="max-height:60px;" src="https://media.giphy.com/media/u3ixOBgotIfMQ/giphy.gif" class="gif">');
 				checkMatchFound();
-				checkMatchFoundTimer = setInterval(checkMatchFound, 5000);				
+				checkMatchFoundTimer = setInterval(checkMatchFound, 2500);				
 			}
 			
 			// set interval
@@ -237,7 +237,15 @@ echo "<img style='max-height:100px;' src='https://graph.facebook.com/$fbuid/pict
 			}
 			
 	 
-		
+		function shuffle(a) {
+    var j, x, i;
+    for (i = a.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
+}
 
 		</script>
 	</head>

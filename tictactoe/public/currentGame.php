@@ -220,7 +220,7 @@ $player2 = htmlspecialchars($_GET['player2']);
 		var row3_count = $("div.row3").find('span' + $sgn_string).length;
 		  
 		if( row1_count == 3 || row2_count == 3 || row3_count == 3 ){
-			alert("Horizontal Winner");
+			//alert("Horizontal Winner");
 			endGame();
 			return true;
 		}
@@ -234,7 +234,7 @@ $player2 = htmlspecialchars($_GET['player2']);
 		var col3_count = $("div.col3").find('span' + $sgn_string).length;
 		  
 		if( col1_count == 3 || col2_count == 3 || col3_count == 3 ){
-			alert("Vertical winner");
+			//alert("Vertical winner");
 			endGame();
 			return true;
 		}
@@ -245,11 +245,11 @@ $player2 = htmlspecialchars($_GET['player2']);
 	function checkDiagWin(){
 		if($("#r2c2").find('span' + $sgn_string).length !== 0 ){
 			if(($("#r1c1").find('span' + $sgn_string).length !== 0 && $("#r3c3").find('span' + $sgn_string).length !== 0 )){
-				alert("Diagnal LR winner");
+				//alert("Diagnal LR winner");
 				endGame();
 				return true;
 			}else if($("#r1c3").find('span' + $sgn_string).length !== 0 && $("#r3c1").find('span' + $sgn_string).length !== 0 ){
-				alert("Diagnal RL winner");
+				//alert("Diagnal RL winner");
 				endGame();
 				return true;
 			}
@@ -303,13 +303,17 @@ $player2 = htmlspecialchars($_GET['player2']);
 		}
 		else
 		{
+			
 			winnerId = "NA";
 		}
-
 		firebase.database().ref('activeMatches/' + $player1 + 'vs' + $player2).set({
 				whoWon: winnerId,
 				matchString: matchString
-			})
+			});
+			
+		firebase.database().ref('completedMatches/' + $player1 + 'vs' + $player2).set({
+				whoWon: winnerId
+			});
 		/*var r1c1 = $(document).find('#r1c1');
 		r1c1 = $(r1c1).find('span').html();*/
 		
@@ -337,9 +341,6 @@ $player2 = htmlspecialchars($_GET['player2']);
 	}
 	
 	$(document).on('click','.play-again-btn',function() {
-			firebase.database().ref('completedMatches/' + $player1 + 'vs' + $player2).set({
-					whoWon: $fbuid
-				});
 			firebase.database().ref('activeMatches/' + $player1 + 'vs' + $player2).remove();
 			firebase.database().ref('users/' + $player1 + '/activeMatch').remove();
 			firebase.database().ref('users/' + $player2 + '/activeMatch').remove();	
