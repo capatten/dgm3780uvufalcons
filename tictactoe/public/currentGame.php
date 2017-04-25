@@ -9,7 +9,7 @@
 
 <!--------------------------------- CUSTOM CSS --------------------------------->
 <link href="../assets/css/public/currentGame.css" rel="stylesheet">
-	
+<link href="../assets/css/currentgame.css" rel="stylesheet">	
 <h1>Current Game</h1><span  class='vsDisplay'></span>
 <br>Turn: <span class='turnDisplaySpan'><img style='max-height:100px;' src='https://graph.facebook.com/<?php echo $player1; ?>/picture?type=large'> VS <img style='max-height:100px;' src='https://graph.facebook.com/<?php echo $player2; ?>/picture?type=large'></span><br>
 
