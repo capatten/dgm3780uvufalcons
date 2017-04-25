@@ -1,3 +1,31 @@
 body{
 	text-align:center;
+	background: #004e64; /* Old browsers */
+    background: -moz-linear-gradient(top, #004e64 0%, #25a18e 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #004e64 0%,#25a18e 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #004e64 0%,#25a18e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004e64', endColorstr='#25a18e',GradientType=0 );
+	color:white;
+}
+h1{
+	color:white;
+	font-family: 'Bahiana', cursive;
+}
+
+p{
+	color:white;	
+}
+button.play-again-btn{
+	margin: 0 auto;
+    display: block;
+    text-align: center;
+	background-color:black;
+	padding:10px;
+	color:white;
+	border-radius:8px;
+	border:1px solid black;
+	font-family:'Bahiana', cursive;
+}
+div.container{
+	color:white;
 }
